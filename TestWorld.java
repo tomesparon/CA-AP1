@@ -3,7 +3,7 @@ public class TestWorld {
 
 	
 	private final static int ROWS = 10;
-	private final static int COLS = 20;
+	private final static int COLS = 10;
 	
 	
 	
@@ -18,28 +18,29 @@ public class TestWorld {
 //		c.start();
 //		d.start();
 		
-		int [][] grid = new int [ROWS][COLS];
+//		int [][] grid = new int [ROWS][COLS];
 
-		int a = (grid.length);//10
-		int b = (grid[0].length);//10
-
-		for(int i = 0; i < a; i++){ // 1 2 3 4 5 x axis
-		    for(int j = 0; j <b; j++) { // 1 2 3 4 5 y axis
-		        int x = 0;
-		        grid[i][j] = x;
+//		int a = (grid.length);//10
+//		int b = (grid[0].length);//10
+//        
+//		for(int i = 0; i < a; i++){ // 1 2 3 4 5 x axis
+//		    for(int j = 0; j <b; j++) { // 1 2 3 4 5 y axis
 		        
-		            System.out.print(" " + x + " ");
-		        
-		    }//end of for J
-		    System.out.println();
-		}// end for i
+		       
 		
-		CreatureOneThread one = new CreatureOneThread(0.8);
+		CreatureOne one = new CreatureOne(0.8);
 		System.out.println(one.description()+ " LIFE OF "+ one.generateLifeSpan());
-		CreatureTwoThread two = new CreatureTwoThread(0.4);
+		CreatureTwo two = new CreatureTwo(0.4);
 		System.out.println(two.description()+ " LIFE OF "+ two.generateLifeSpan());
 		
-		
+		Creature[][] area = new Creature[ROWS][COLS];
+			for(int i = 0;i < area.length;i++){
+				for(int j = 0; j <area[0].length; j++){
+					System.out.print(one.generateLifeSpan());
+					
+				}
+				System.out.println();
+			}
 		
 	}
 	

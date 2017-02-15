@@ -1,23 +1,23 @@
 import java.util.Random;
 
-public class CreatureOneThread extends Creature {
+public class CreatureTwo extends Creature {
 	
-	private final static int MAXLIFE = 10;
+	private final static int MAXLIFE = 5;
+	
 
-	public CreatureOneThread(double fitness) {
+	public CreatureTwo(double fitness) {
 		super(fitness);
 		
-	}  
+	}
 
 //	private double fitness;
 //	private int lifespan;
-	//private static final double LEVEL = 0.8;
 	
 	
 	
 	
 	public String description() {
-		String ds = "I am a creature 1 with fitness " + fitness ;
+		String ds = "I am a creature 2 with fitness " + fitness;
 		return ds;
 	}
 
@@ -27,6 +27,17 @@ public class CreatureOneThread extends Creature {
 		int span = rn.nextInt(MAXLIFE);
 		return span;
 	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -36,15 +47,14 @@ public class CreatureOneThread extends Creature {
 	
 
 }
-//
-//public CreatureOneThread(double fitness, int lifespan) {
-//	
-//	this.fitness = fitness;
-//	this.lifespan = lifespan;
-//	
-//	
-//}
-//
+
+
+
+
+
+
+
+
 //
 ///**
 // * @param fitness the fitness to set

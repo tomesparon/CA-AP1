@@ -1,5 +1,5 @@
 
-public abstract class Creature {
+public abstract class Creature implements Runnable{
 	// Needed stuff
 	protected double fitness;
 	
