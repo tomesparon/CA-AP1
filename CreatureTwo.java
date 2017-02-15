@@ -17,7 +17,7 @@ public class CreatureTwo extends Creature {
 	
 	
 	public String description() {
-		String ds = "I am a creature 2 with fitness " + fitness;
+		String ds = "A new creature 2 spawned with fitness " + fitness;
 		return ds;
 	}
 
@@ -30,16 +30,19 @@ public class CreatureTwo extends Creature {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		// Task statements
+		for(int i =0; i <10; i++){
+			CreatureTwo two = new CreatureTwo(fitness);
+			int span = two.generateLifeSpan();
+			System.out.println(i +": " +two.description()+ " LIFE OF "+ span);
+			try {
+				Thread.sleep(span*1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -48,67 +51,3 @@ public class CreatureTwo extends Creature {
 
 }
 
-
-
-
-
-
-
-
-//
-///**
-// * @param fitness the fitness to set
-// */
-//public void setFitness(double fitness) {
-//	this.fitness = fitness;
-//}
-//
-//
-//
-//
-///**
-// * @param lifespan the lifespan to set
-// */
-//public void setLifespan(int lifespan) {
-//	this.lifespan = lifespan;
-//}
-//
-//
-//
-///**
-// * @return the fitness
-// */
-//public double getFitness() {
-//	return fitness;
-//}
-//
-//
-//
-///**
-// * @return the lifespan
-// */
-//public int getLifespan() {
-//	return lifespan;
-//}
-//
-//
-//
-//
-//public void run()
-//{
-//try
-//    {
-//    // Do all time steps.
-//    
-//
-//        // Wait for all the other threads to get to this point, then
-//        // print next state of all cells and update all cells'
-//        // current states to equal next states (in the single
-//        // threaded barrier action).
-//        //barrier.await();
-//        
-//    }
-//catch (Exception exc)
-//    {
-//    }
-//}

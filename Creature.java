@@ -23,12 +23,4 @@ public abstract class Creature implements Runnable{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }
