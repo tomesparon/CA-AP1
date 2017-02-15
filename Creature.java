@@ -2,15 +2,15 @@
 public abstract class Creature implements Runnable{
 	// Needed stuff
 	protected double fitness;
-	//private final World world;
+	private final World world;
 	
-	public Creature(double fitness) {
+	public Creature(double fitness, World world) {
 	
 		this.fitness = fitness;
-		//this.world = world
+		this.world = world;
 		
 	}
-	// Must implement a generate lifespan
+	// Must implement a generate life-span
 	abstract int generateLifeSpan();
 	
 	
@@ -20,7 +20,18 @@ public abstract class Creature implements Runnable{
 		return ds;
 	}
 	
+	public World getWorld() {
+		return world;
+	}
 	
+
+	
+	
+	
+	
+	public double getFitness() {
+		return fitness;
+		}
 	// Generic method for moveset
 	
 	

@@ -5,18 +5,13 @@ public class CreatureOne extends Creature{
 	private final static int MAXLIFE = 10;
 	String itsName = "1";
 
-	public CreatureOne(double fitness) {
-		super(fitness);
+	public CreatureOne(double fitness,World world) {
+		super(fitness,world);
 		
 		
 	}  
 
-//	private double fitness;
-//	private int lifespan;
-	//private static final double LEVEL = 0.8;
-	
-	
-	
+
 	
 	public String getItsName() {
 		return itsName;
@@ -39,23 +34,24 @@ public class CreatureOne extends Creature{
 	}
 	
 	
-	public double getFitness() {
-	return fitness;
-	}
+	
 
 	@Override
 	public void run(){
 		
 		try {
-			World test = new World();
+			//World test = new World();
 			// Task statements
 			for (int i = 0; i < 10; i++) {
-				CreatureOne one = new CreatureOne(fitness);
+				CreatureOne one = new CreatureOne(fitness,getWorld());
 				int span = one.generateLifeSpan();
-				System.out.println(i + ": " + one.description() + " LIFE OF " + span);
+				//System.out.println(i + ": " + one.description() + " LIFE OF " + span);
 				
 				//test.addToWorld(itsName);
-				test.printWorld();
+				//test.printWorld();
+				one.getWorld().addToWorld(itsName);
+				one.getWorld().printWorld();
+				
 				Thread.sleep(span * 1000);
 			}
 

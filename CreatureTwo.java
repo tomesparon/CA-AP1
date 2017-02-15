@@ -6,8 +6,8 @@ public class CreatureTwo extends Creature {
 	private String itsName = "2";
 	
 
-	public CreatureTwo(double fitness) {
-		super(fitness);
+	public CreatureTwo(double fitness, World world) {
+		super(fitness, world);
 		
 	}
 
@@ -32,15 +32,15 @@ public class CreatureTwo extends Creature {
 	@Override
 	public void run() {
 		try {
-			World test = new World();
+			
 			// Task statements
 			for (int i = 0; i < 10; i++) {
-				CreatureTwo two = new CreatureTwo(fitness);
+				CreatureTwo two = new CreatureTwo(fitness, getWorld());
 				int span = two.generateLifeSpan();
-				System.out.println(i + ": " + two.description() + " LIFE OF " + span);
+				//System.out.println(i + ": " + two.description() + " LIFE OF " + span);
 
-				//test.addToWorld(itsName);
-				test.printWorld();
+				two.getWorld().addToWorld(itsName);
+				two.getWorld().printWorld();
 				Thread.sleep(span * 1000);
 			}
 		} catch (InterruptedException e) {

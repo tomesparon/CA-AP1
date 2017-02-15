@@ -1,3 +1,4 @@
+import java.util.concurrent.locks.*;
 
 public class World {
 
@@ -5,7 +6,9 @@ public class World {
     final int cols = 30;
     String[][] matrix;
 	String unoccupied = ".";
-    
+	//Safety first
+	private ReentrantLock worldLock = new ReentrantLock();
+	private Condition condition = worldLock.newCondition();
     
 	public World() {
 		
@@ -34,22 +37,24 @@ public class World {
 			}
 			System.out.print("\n");
 		}
-	
-		
+		System.out.print("\n");
 	}
-	
+	//setter? this is a test
 	public void addToWorld(String name) {
 
 		for (int i = 0; i < this.matrix.length; i++) {
 			for (int j = 0; j < this.matrix[0].length; j++) {
-				
-				matrix[i][j]= name;
-				
-	
+
+				matrix[i][j] = name;
+
 			}
 
 		}
 	
 	}
+	
+	
+	
+	
 	
 }
