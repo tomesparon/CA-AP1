@@ -9,7 +9,6 @@ public class TestWorld {
 	
 	
 	
-	
 	public static void main(String[] args) {
 		
 //		Start my objects
@@ -35,6 +34,10 @@ public class TestWorld {
 		    System.out.println();
 		}// end for i
 		
+		CreatureOneThread one = new CreatureOneThread(0.8);
+		System.out.println(one.description()+ " LIFE OF "+ one.generateLifeSpan());
+		CreatureTwoThread two = new CreatureTwoThread(0.4);
+		System.out.println(two.description()+ " LIFE OF "+ two.generateLifeSpan());
 		
 		
 		
