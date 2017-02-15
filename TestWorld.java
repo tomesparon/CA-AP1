@@ -38,7 +38,8 @@ public class TestWorld {
 //		}
 		//On your marks...
 		second.start();
-		
+//		World test = new World();
+//		test.printWorld();
 		
 		
 	}

@@ -3,6 +3,7 @@ import java.util.Random;
 public class CreatureOne extends Creature{
 	
 	private final static int MAXLIFE = 10;
+	String itsName = "1";
 
 	public CreatureOne(double fitness) {
 		super(fitness);
@@ -17,6 +18,14 @@ public class CreatureOne extends Creature{
 	
 	
 	
+	public String getItsName() {
+		return itsName;
+	}
+
+	public void setItsName(String itsName) {
+		this.itsName = itsName;
+	}
+
 	public String description() {
 		String ds = "A new creature 1 spawned with fitness " + fitness ;
 		return ds;
@@ -37,22 +46,31 @@ public class CreatureOne extends Creature{
 	@Override
 	public void run(){
 		
-		
-		// Task statements
-		for(int i =0; i <10; i++){
-		CreatureOne one = new CreatureOne(fitness);
-		int span = one.generateLifeSpan();
-		System.out.println(i +": " +one.description()+ " LIFE OF "+ span);
 		try {
-			Thread.sleep(span*1000);
+			World test = new World();
+			// Task statements
+			for (int i = 0; i < 10; i++) {
+				CreatureOne one = new CreatureOne(fitness);
+				int span = one.generateLifeSpan();
+				System.out.println(i + ": " + one.description() + " LIFE OF " + span);
+				
+				//test.addToWorld(itsName);
+				test.printWorld();
+				Thread.sleep(span * 1000);
+			}
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
+
 	}
 	
-	
+//	public String toString(){
+//		return "1";
+//		
+//		
+//	}
 	
 
 }
