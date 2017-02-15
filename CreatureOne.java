@@ -3,7 +3,7 @@ import java.util.Random;
 public class CreatureOne extends Creature{
 	
 	private final static int MAXLIFE = 10;
-	String itsName = "1";
+	private String itsName = "1";
 
 	public CreatureOne(double fitness,World world) {
 		super(fitness,world);
@@ -13,13 +13,8 @@ public class CreatureOne extends Creature{
 
 
 	
-	public String getItsName() {
-		return itsName;
-	}
 
-	public void setItsName(String itsName) {
-		this.itsName = itsName;
-	}
+
 
 	public String description() {
 		String ds = "A new creature 1 spawned with fitness " + fitness ;

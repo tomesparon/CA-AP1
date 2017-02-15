@@ -25,15 +25,15 @@ public class World {
 	}
     
 	
+	/**
+	 * Displays the world as it stands
+	 */
 	public void printWorld(){
 		
-		//this.matrix[3][3] = one.toString();
 		
 		for (int i = 0; i < this.matrix.length; i++) {
 			for (int j = 0; j < this.matrix[0].length; j++) {
-				//matrix[0][j]= one.getItsName();
 				System.out.print(matrix[i][j] + " ");
-	
 			}
 			System.out.print("\n");
 		}
@@ -45,15 +45,21 @@ public class World {
 		for (int i = 0; i < this.matrix.length; i++) {
 			for (int j = 0; j < this.matrix[0].length; j++) {
 
-				matrix[i][j] = name;
+				matrix[0][j] = name;
 
 			}
 
 		}
 	
 	}
-	
-	
+	// Textually represent the species
+	public String toString(){
+		
+		
+		return unoccupied;
+		
+		
+	}
 	
 	
 	

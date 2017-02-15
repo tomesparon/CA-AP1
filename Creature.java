@@ -26,13 +26,12 @@ public abstract class Creature implements Runnable{
 	
 
 	
-	
-	
-	
 	public double getFitness() {
 		return fitness;
 		}
 	// Generic method for moveset
+	
+
 	
 	
 }
