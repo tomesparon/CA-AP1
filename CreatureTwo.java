@@ -33,25 +33,24 @@ public class CreatureTwo extends Creature {
 
 	@Override
 	public void run() {
-		try {
-			
-			// Task statements
-			for (int i = 0; i < 10; i++) {
+		
+		
+		
 				CreatureTwo two = new CreatureTwo(getWorld(),x,y);
-				System.out.println(i + ": " + two.description());
+				
 
-				
-				
-				
-				two.getWorld().addToWorld(itsName,x,y);
+				two.getWorld().addToWorld(two);
 				two.getWorld().printWorld();
-				Thread.sleep(span);
-				y++;
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				
+				//move to top block
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
 
 	}
 
@@ -61,7 +60,10 @@ public class CreatureTwo extends Creature {
 		return fitness;
 	}
 	
-	
+	public String toString(){
+		return itsName;
+		
+	}
 	
 	
 	

@@ -12,6 +12,7 @@ public class CreatureOne extends Creature{
 		super(world,x,y);
 		this.span = generateLifeSpan();
 		this.fitness = FITLEVEL;
+		//this.x = 0;
 		
 	}  
 
@@ -38,26 +39,30 @@ public class CreatureOne extends Creature{
 	@Override
 	public void run(){
 		
-		try {
-			//World test = new World();
-			// Task statements
-			for (int i = 0; i < 10; i++) {
+			
+			
 				CreatureOne one = new CreatureOne(getWorld(),x,y);
-				System.out.println(i + ": " + one.description() );
+				//System.out.println(i + ": " + one.description() );
 				
+				//System.out.println(one.getX());
+				one.getWorld().addToWorld(one);
+				//one.getWorld().printWorld();
 				
-				one.getWorld().addToWorld(itsName,x,y);
 				one.getWorld().printWorld();
 				
-				Thread.sleep(span);
-				y++; //increment its row
+				
+				
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				//Then loop
-			}
+			
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 
 	}
 
@@ -72,11 +77,10 @@ public class CreatureOne extends Creature{
 		return fitness;
 	}
 	
-//	public String toString(){
-//		return "1";
-//		
-//		
-//	}
+	public String toString(){
+		return "1";
+		
+	}
 	
 
 }

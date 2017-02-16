@@ -1,7 +1,7 @@
 
 public abstract class Creature implements Runnable{
 	// Needed stuff
-	private final World world;
+	protected final World world;
 	
 	private final static int[][] circleMoves = {
             {-1, -1}, {-1, 0}, {-1, 1}
@@ -19,6 +19,7 @@ public abstract class Creature implements Runnable{
 		this.world = world;
 		x = xin;
 		y = yin;
+		
 		
 	}
 	// Must implement a generate life-span

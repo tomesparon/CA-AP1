@@ -1,25 +1,27 @@
+import java.util.Arrays;
 import java.util.concurrent.locks.*;
 
 public class World {
 
 	final int rows = 10;
     final int cols = 30;
-    String[][] matrix;
+    Creature[][] matrix;
 	String unoccupied = ".";
 	//Safety first
 	private ReentrantLock worldLock = new ReentrantLock();
 	private Condition condition = worldLock.newCondition();
-	private boolean placing = false; // to begin with.
+	//private boolean placing = false; // to begin with.
     
 	public World() {
 		
-		this.matrix = new String[rows][cols];
+		// Create a matrix
+		this.matrix = new Creature[rows][cols];
 		
 		
 		for (int i = 0; i < this.matrix.length; i++) {
 			for (int j = 0; j < this.matrix[0].length; j++) {
 				
-				matrix[i][j] = unoccupied;
+				matrix[i][j] = null;
 			}
 		}
 		
@@ -29,68 +31,33 @@ public class World {
 	/**
 	 * Displays the world as it stands getWorld
 	 */
-	public void printWorld(){
-		worldLock.lock();
-		try{
-			while(!placing){
-				try{
-					condition.await();
-				}catch(InterruptedException e){
-					e.printStackTrace();
-				}
-			}
+	public synchronized void printWorld(){
+		
 			
 			for (int i = 0; i < this.matrix.length; i++) {
 				for (int j = 0; j < this.matrix[0].length; j++) {
-					System.out.print(matrix[i][j] + " ");
+					if(matrix[i][j]==null){
+						System.out.print(".");
+					}else
+						System.out.print(matrix[i][j]);
 				}
-				System.out.print("\n");
+				System.out.println();
 			}
-			System.out.print("\n");
+			System.out.println("_______________");
 			
-			
-			placing = false;
-			condition.signal();
-		}finally{
-			worldLock.unlock();
-			System.out.println("Thread printed world and unlocked ^^^");
-		}
-		
+			//System.out.println(Arrays.deepToString(matrix));
 	}
 	
 	//setter? this is a test setWorld
-	public void addToWorld(String name,int x,int y) {
-		worldLock.lock();
-		try {
-
-			while (placing) {
-				try {
-					condition.await();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+	public synchronized void addToWorld(Creature creature) {
+		
 			for (int i = 0; i < this.matrix.length; i++) {
 				for (int j = 0; j < this.matrix[0].length; j++) {
-					matrix[x][y] = name;
+					matrix[creature.getX()][creature.getY()] = creature;
 				}
 			}
-			placing = true;
-			condition.signal();
-		} finally {
-			worldLock.unlock();
-			System.out.println("Thread made changes and unlocked VVV");
-		}
 	}
-	// Textually represent the species
-	public String toString(){
-		
-		
-		return unoccupied;
-		
-		
-	}
-	
+
 	
 	
 }
