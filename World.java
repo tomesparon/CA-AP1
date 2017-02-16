@@ -53,6 +53,7 @@ public class World {
 			condition.signal();
 		}finally{
 			worldLock.unlock();
+			System.out.println("Thread printed world and unlocked ^^^");
 		}
 		
 	}
@@ -78,6 +79,7 @@ public class World {
 			condition.signal();
 		} finally {
 			worldLock.unlock();
+			System.out.println("Thread made changes and unlocked VVV");
 		}
 	}
 	// Textually represent the species

@@ -4,11 +4,11 @@ public class CreatureOne extends Creature{
 	
 	private final static int MAXLIFE = 10;
 	private String itsName = "1";
-	
+	private int span;
 	
 	public CreatureOne(double fitness,World world, int x, int y) {
 		super(fitness,world,x,y);
-		
+		this.span = generateLifeSpan();
 		
 	}  
 
@@ -40,8 +40,7 @@ public class CreatureOne extends Creature{
 			// Task statements
 			for (int i = 0; i < 10; i++) {
 				CreatureOne one = new CreatureOne(fitness,getWorld(),x,y);
-				int span = one.generateLifeSpan();
-				//System.out.println(i + ": " + one.description() + " LIFE OF " + span);
+				System.out.println(i + ": " + one.description() + " LIFE OF " + span);
 				
 				//test.addToWorld(itsName);
 				//test.printWorld();

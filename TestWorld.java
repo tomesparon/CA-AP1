@@ -12,8 +12,8 @@ public class TestWorld {
 		       
 
 		World world = new World();
-		Runnable species1 = new CreatureOne(FIT1,world,1,1); //param its name
-		Runnable species2 = new CreatureTwo(FIT2, world,2,2);
+		Runnable species1 = new CreatureOne(FIT1,world,5,5); //param its name
+		Runnable species2 = new CreatureTwo(FIT2, world,4,15);
 		Thread first = new Thread(species1);
 		Thread second = new Thread(species2);
 		// On your marks...
