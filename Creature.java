@@ -1,7 +1,6 @@
 
 public abstract class Creature implements Runnable{
 	// Needed stuff
-	protected double fitness;
 	private final World world;
 	
 	private final static int[][] circleMoves = {
@@ -14,9 +13,9 @@ public abstract class Creature implements Runnable{
 	protected int y;
 	
 	
-	public Creature(double fitness, World world, int xin, int yin) {
+	public Creature(World world, int xin, int yin) {
 	
-		this.fitness = fitness;
+		
 		this.world = world;
 		x = xin;
 		y = yin;
@@ -25,22 +24,14 @@ public abstract class Creature implements Runnable{
 	// Must implement a generate life-span
 	abstract int generateLifeSpan();
 	
-	
-	// Generic testing method
-	public String description() {
-		String ds = "I am a creature with fitness " + fitness ;
-		return ds;
-	}
+	abstract double getFitness();
+
 	
 	public World getWorld() {
 		return world;
 	}
 	
 
-	
-	public double getFitness() {
-		return fitness;
-		}
 	
 	
 	

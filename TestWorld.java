@@ -2,18 +2,14 @@
 public class TestWorld {
 
 	
-	private final static double FIT1 = 0.8;
-	private final static double FIT2 = 0.4;
-	
-	
 	
 	public static void main(String[] args) {
 
 		       
 
 		World world = new World();
-		Runnable species1 = new CreatureOne(FIT1,world,5,5); //param its name
-		Runnable species2 = new CreatureTwo(FIT2, world,4,15);
+		Runnable species1 = new CreatureOne(world,5,5); //starting coordinates
+		Runnable species2 = new CreatureTwo(world,4,15);// starting coordinates
 		Thread first = new Thread(species1);
 		Thread second = new Thread(species2);
 		// On your marks...

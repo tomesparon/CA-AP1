@@ -3,13 +3,15 @@ import java.util.Random;
 public class CreatureTwo extends Creature {
 	
 	private final static int MAXLIFE = 5;
+	private final static double FITLEVEL = 0.4;
 	private String itsName = "2";
 	private int span;
-	
+	private double fitness;
 
-	public CreatureTwo(double fitness, World world, int x, int y) {
-		super(fitness, world,x,y);
+	public CreatureTwo( World world, int x, int y) {
+		super(world,x,y);
 		this.span = generateLifeSpan();
+		this.fitness = FITLEVEL;
 	}
 
 //	private double fitness;
@@ -17,9 +19,8 @@ public class CreatureTwo extends Creature {
 	
 	
 	
-	@Override
 	public String description() {
-		String ds = "A new creature 2 spawned with fitness " + fitness;
+		String ds = "A new creature 2 spawned with fitness " + fitness + ",Span of " + span;
 		return ds;
 	}
 
@@ -36,15 +37,15 @@ public class CreatureTwo extends Creature {
 			
 			// Task statements
 			for (int i = 0; i < 10; i++) {
-				CreatureTwo two = new CreatureTwo(fitness, getWorld(),x,y);
-				System.out.println(i + ": " + two.description() + " LIFE OF " + span);
+				CreatureTwo two = new CreatureTwo(getWorld(),x,y);
+				System.out.println(i + ": " + two.description());
 
 				
 				
 				
 				two.getWorld().addToWorld(itsName,x,y);
 				two.getWorld().printWorld();
-				Thread.sleep(span * 1000);
+				Thread.sleep(span);
 				y++;
 			}
 		} catch (InterruptedException e) {
@@ -52,6 +53,12 @@ public class CreatureTwo extends Creature {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	double getFitness() {
+		// TODO Auto-generated method stub
+		return fitness;
 	}
 	
 	
