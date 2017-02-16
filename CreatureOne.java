@@ -4,9 +4,10 @@ public class CreatureOne extends Creature{
 	
 	private final static int MAXLIFE = 10;
 	private String itsName = "1";
-
-	public CreatureOne(double fitness,World world) {
-		super(fitness,world);
+	
+	
+	public CreatureOne(double fitness,World world, int x, int y) {
+		super(fitness,world,x,y);
 		
 		
 	}  
@@ -38,16 +39,18 @@ public class CreatureOne extends Creature{
 			//World test = new World();
 			// Task statements
 			for (int i = 0; i < 10; i++) {
-				CreatureOne one = new CreatureOne(fitness,getWorld());
+				CreatureOne one = new CreatureOne(fitness,getWorld(),x,y);
 				int span = one.generateLifeSpan();
 				//System.out.println(i + ": " + one.description() + " LIFE OF " + span);
 				
 				//test.addToWorld(itsName);
 				//test.printWorld();
-				one.getWorld().addToWorld(itsName);
+				one.getWorld().addToWorld(itsName,x,y);
 				one.getWorld().printWorld();
 				
 				Thread.sleep(span * 1000);
+				y++; //increment its row
+				//Then loop
 			}
 
 		} catch (InterruptedException e) {

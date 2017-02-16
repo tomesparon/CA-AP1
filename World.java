@@ -9,6 +9,7 @@ public class World {
 	//Safety first
 	private ReentrantLock worldLock = new ReentrantLock();
 	private Condition condition = worldLock.newCondition();
+	private boolean placing = false; // to begin with.
     
 	public World() {
 		
@@ -26,31 +27,58 @@ public class World {
     
 	
 	/**
-	 * Displays the world as it stands
+	 * Displays the world as it stands getWorld
 	 */
 	public void printWorld(){
-		
-		
-		for (int i = 0; i < this.matrix.length; i++) {
-			for (int j = 0; j < this.matrix[0].length; j++) {
-				System.out.print(matrix[i][j] + " ");
+		worldLock.lock();
+		try{
+			while(!placing){
+				try{
+					condition.await();
+				}catch(InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+			
+			for (int i = 0; i < this.matrix.length; i++) {
+				for (int j = 0; j < this.matrix[0].length; j++) {
+					System.out.print(matrix[i][j] + " ");
+				}
+				System.out.print("\n");
 			}
 			System.out.print("\n");
+			
+			
+			placing = false;
+			condition.signal();
+		}finally{
+			worldLock.unlock();
 		}
-		System.out.print("\n");
+		
 	}
-	//setter? this is a test
-	public void addToWorld(String name) {
-
-		for (int i = 0; i < this.matrix.length; i++) {
-			for (int j = 0; j < this.matrix[0].length; j++) {
-
-				matrix[0][j] = name;
-
-			}
-
-		}
 	
+	//setter? this is a test setWorld
+	public void addToWorld(String name,int x,int y) {
+		worldLock.lock();
+		try {
+
+			while (placing) {
+				try {
+					condition.await();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i = 0; i < this.matrix.length; i++) {
+				for (int j = 0; j < this.matrix[0].length; j++) {
+					matrix[x][y] = name;
+				}
+			}
+			placing = true;
+			condition.signal();
+		} finally {
+			worldLock.unlock();
+		}
 	}
 	// Textually represent the species
 	public String toString(){

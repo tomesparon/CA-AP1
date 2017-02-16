@@ -5,9 +5,10 @@ public class CreatureTwo extends Creature {
 	private final static int MAXLIFE = 5;
 	private String itsName = "2";
 	
+	
 
-	public CreatureTwo(double fitness, World world) {
-		super(fitness, world);
+	public CreatureTwo(double fitness, World world, int x, int y) {
+		super(fitness, world,x,y);
 		
 	}
 
@@ -35,13 +36,17 @@ public class CreatureTwo extends Creature {
 			
 			// Task statements
 			for (int i = 0; i < 10; i++) {
-				CreatureTwo two = new CreatureTwo(fitness, getWorld());
+				CreatureTwo two = new CreatureTwo(fitness, getWorld(),x,y);
 				int span = two.generateLifeSpan();
 				//System.out.println(i + ": " + two.description() + " LIFE OF " + span);
 
-				two.getWorld().addToWorld(itsName);
+				
+				
+				
+				two.getWorld().addToWorld(itsName,x,y);
 				two.getWorld().printWorld();
 				Thread.sleep(span * 1000);
+				y++;
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
