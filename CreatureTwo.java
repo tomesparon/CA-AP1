@@ -44,7 +44,7 @@ public class CreatureTwo extends Creature {
 			two.getWorld().addToWorld(two);
 			two.getWorld().printWorld();
 			// System.err.println(two.getFitness());
-
+			//System.err.println(span);
 			Thread.sleep(span * 1000);
 
 			// Add children (no conditions)
@@ -76,7 +76,7 @@ public class CreatureTwo extends Creature {
 			// Print state with children.
 			two.getWorld().printWorld();
 			// Another sleep...
-			Thread.sleep(span * 1000);
+			//Thread.sleep(span * 1000);
 			// Parent dies
 			Thread.currentThread().interrupt();
 		} catch (InterruptedException e) {

@@ -84,7 +84,7 @@ public class CreatureOne extends Creature{
 			// Print state with children.
 			one.getWorld().printWorld();
 			//Another sleep...
-			Thread.sleep(span * 1000);
+			//Thread.sleep(span * 1000);
 			// Parent dies
 			Thread.currentThread().interrupt();
 
