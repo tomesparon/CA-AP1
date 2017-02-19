@@ -39,27 +39,34 @@ public class CreatureOne extends Creature{
 	@Override
 	public void run(){
 		
+		try {
+
+			CreatureOne one = new CreatureOne(getWorld(), x, y);
+
+			one.getWorld().addToWorld(one);
+			one.getWorld().printWorld();
 			
-			
-				CreatureOne one = new CreatureOne(getWorld(),x,y);
-				//System.out.println(i + ": " + one.description() );
-				
-				//System.out.println(one.getX());
-				one.getWorld().addToWorld(one);
-				//one.getWorld().printWorld();
-				
-				one.getWorld().printWorld();
-				
-				
-				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			Thread.sleep(1000);
+			// Add children (no conditions)
+			for (int nx = x-1 ; nx <=x + 1; nx++) {
+				for (int ny = y-1; ny <= y + 1; ny++) {
+
+					one.setX(nx);
+					one.setY(ny);
+					one.getWorld().addToWorld(one);
+					
+					
+
 				}
+			}
+			one.getWorld().printWorld();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 				
-				//Then loop
 			
 
 

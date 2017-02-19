@@ -36,19 +36,30 @@ public class CreatureTwo extends Creature {
 		
 		
 		
-				CreatureTwo two = new CreatureTwo(getWorld(),x,y);
-				
+		try {
 
-				two.getWorld().addToWorld(two);
-				two.getWorld().printWorld();
-				
-				//move to top block
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			CreatureTwo two = new CreatureTwo(getWorld(), x, y);
+
+			two.getWorld().addToWorld(two);
+			two.getWorld().printWorld();
+			Thread.sleep(1000);
+
+			// Add children (no conditions)
+			for (int nx = x-1 ; nx <=x + 1; nx++) {
+				for (int ny = y-1; ny <= y+ 1; ny++) {
+
+					two.setX(nx);
+					two.setY(ny);
+					two.getWorld().addToWorld(two);
+
 				}
+			}
+			two.getWorld().printWorld();
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 			
 
