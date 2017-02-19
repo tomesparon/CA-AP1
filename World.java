@@ -64,4 +64,6 @@ public class World {
 			
 	}
 	
+	// checkRival method
+	
 }

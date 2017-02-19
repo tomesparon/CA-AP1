@@ -30,7 +30,7 @@ public class CreatureTwo extends Creature {
 		int span = rn.nextInt(MAXLIFE);
 		return span;
 	}
-
+	// MERGE INTO THE CREATURE EXTENDED CLASS!!!!!
 	@Override
 	public void run() {
 		
@@ -40,22 +40,33 @@ public class CreatureTwo extends Creature {
 
 			CreatureTwo two = new CreatureTwo(getWorld(), x, y);
 
+			// First generation and add in centre
 			two.getWorld().addToWorld(two);
-			//two.getWorld().printWorld();
-			Thread.sleep(span*1000);
+			two.getWorld().printWorld();
+			// System.err.println(two.getFitness());
+
+			Thread.sleep(span * 1000);
 
 			// Add children (no conditions)
-			for (int nx = x-1 ; nx <=x + 1; nx++) {
-				for (int ny = y-1; ny <= y+ 1; ny++) {
+			for (int nx = x - 1; nx <= x + 1; nx++) {
+				for (int ny = y - 1; ny <= y + 1; ny++) {
 
 					two.setX(nx);
 					two.setY(ny);
-					two.getWorld().addToWorld(two);
-
+					// Important or else billions of threads are created regardless.
+					if (getWorld().itsEmpty(nx, ny)==true && Math.random() <= fitness) {
+						Thread child = new Thread(new CreatureTwo(getWorld(), two.getX(), two.getY()));
+						child.start();
+						
+					}
 				}
 			}
-			//two.getWorld().printWorld();
-
+			// Print state with children.
+			two.getWorld().printWorld();
+			//Another sleep...
+			Thread.sleep(span * 1000);
+			// Parent dies
+			Thread.currentThread().interrupt();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

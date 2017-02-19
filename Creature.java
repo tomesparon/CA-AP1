@@ -3,11 +3,11 @@ public abstract class Creature implements Runnable{
 	// Needed stuff
 	protected final World world;
 	
-	protected final static int[][] circleMoves = {
-            {-1, -1}, {-1, 0}, {-1, 1}
-            , {0, 1}, {1, 1}, {1, 0}
-            , {1, -1}, {0, -1}, {0, 0}
-    };
+//	protected final static int[][] circleMoves = {
+//            {-1, -1}, {-1, 0}, {-1, 1}
+//            , {0, 1}, {1, 1}, {1, 0}
+//            , {1, -1}, {0, -1}, {0, 0}
+//    };
 	
 	protected int x;
 	protected int y;

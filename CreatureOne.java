@@ -45,7 +45,7 @@ public class CreatureOne extends Creature{
 
 			// First generation and add in centre
 			one.getWorld().addToWorld(one);
-			// one.getWorld().printWorld();
+			 one.getWorld().printWorld();
 			// System.err.println(one.getFitness());
 
 			Thread.sleep(span * 1000);
@@ -56,17 +56,20 @@ public class CreatureOne extends Creature{
 
 					one.setX(nx);
 					one.setY(ny);
-					
+					// Important or else billions of threads are created regardless.
 					if (getWorld().itsEmpty(nx, ny)==true && Math.random() <= fitness) {
-						Thread child = new Thread(new CreatureOne(getWorld(), nx, ny));
+						Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
 						child.start();
+						
+					}else if(getWorld().itsEmpty(nx, ny)==false && Math.random() <= fitness) {
+						//Create a child based on fit diff and murder
 						
 					}
 				}
 			}
 			// Print state with children.
 			one.getWorld().printWorld();
-			
+			//Another sleep...
 			Thread.sleep(span * 1000);
 			// Parent dies
 			Thread.currentThread().interrupt();
