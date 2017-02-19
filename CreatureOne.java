@@ -42,24 +42,30 @@ public class CreatureOne extends Creature{
 		try {
 
 			CreatureOne one = new CreatureOne(getWorld(), x, y);
-
-			one.getWorld().addToWorld(one);
-			one.getWorld().printWorld();
 			
-			Thread.sleep(1000);
+			//First generation and add in centre
+			one.getWorld().addToWorld(one);
+			//one.getWorld().printWorld();
+			
+			Thread.sleep(span*1000);
+			
 			// Add children (no conditions)
 			for (int nx = x-1 ; nx <=x + 1; nx++) {
 				for (int ny = y-1; ny <= y + 1; ny++) {
 
 					one.setX(nx);
 					one.setY(ny);
-					one.getWorld().addToWorld(one);
 					
+					Thread child = new Thread(new CreatureOne(getWorld(), nx, ny));
+					child.start();
 					
-
 				}
 			}
+			// Print state with children.
 			one.getWorld().printWorld();
+			
+			// Parent dies
+			Thread.currentThread().interrupt();
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -85,7 +91,7 @@ public class CreatureOne extends Creature{
 	}
 	
 	public String toString(){
-		return "1";
+		return itsName;
 		
 	}
 	

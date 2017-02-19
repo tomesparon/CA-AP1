@@ -42,7 +42,7 @@ public class CreatureTwo extends Creature {
 
 			two.getWorld().addToWorld(two);
 			two.getWorld().printWorld();
-			Thread.sleep(1000);
+			Thread.sleep(span*1000);
 
 			// Add children (no conditions)
 			for (int nx = x-1 ; nx <=x + 1; nx++) {

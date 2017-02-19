@@ -6,7 +6,7 @@ public class World {
 	final int rows = 10;
     final int cols = 30;
     Creature[][] matrix;
-	String unoccupied = ".";
+	String unoccupied = "-";
 	//Safety first
 	private ReentrantLock worldLock = new ReentrantLock();
 	private Condition condition = worldLock.newCondition();
@@ -37,7 +37,7 @@ public class World {
 			for (int i = 0; i < this.matrix.length; i++) {
 				for (int j = 0; j < this.matrix[0].length; j++) {
 					if(matrix[i][j]==null){
-						System.out.print(".");
+						System.out.print(unoccupied);
 					}else
 						System.out.print(matrix[i][j]);
 				}
