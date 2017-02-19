@@ -45,7 +45,7 @@ public class CreatureOne extends Creature{
 
 			// First generation and add in centre
 			one.getWorld().addToWorld(one);
-			 one.getWorld().printWorld();
+			one.getWorld().printWorld();
 			// System.err.println(one.getFitness());
 
 			Thread.sleep(span * 1000);
@@ -54,17 +54,31 @@ public class CreatureOne extends Creature{
 			for (int nx = x - 1; nx <= x + 1; nx++) {
 				for (int ny = y - 1; ny <= y + 1; ny++) {
 
-					one.setX(nx);
-					one.setY(ny);
-					// Important or else billions of threads are created regardless.
-					if (getWorld().itsEmpty(nx, ny)==true && Math.random() <= fitness) {
-						Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
-						child.start();
+					// Change spawn position
+					// Solid Border control if statement
+					if (x < 9 && x > 0 && y < 29 && y > 0) {
+						one.setX(nx);
+						one.setY(ny);
 						
-					}else if(getWorld().itsEmpty(nx, ny)==false && Math.random() <= fitness) {
-						//Create a child based on fit diff and murder
+						
+						// Important or else billions of threads are created
+						// regardless.
+						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= one.getFitness()) {
+							Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
+							child.start();
+
+						} else if (getWorld().itsEmpty(nx, ny) == false && Math.random() <= one.getFitness()-getWorld().rivalFit(nx, ny)) {
+							// Create a child based on fit diff and murder
+							//System.err.println(getWorld().rivalFit(nx, ny));
+							Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
+							child.start();
+							
+						}
+						
 						
 					}
+
+					
 				}
 			}
 			// Print state with children.

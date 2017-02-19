@@ -35,7 +35,7 @@ public abstract class Creature implements Runnable{
 	
 	
 	
-	
+	// Should i synchronized ??
 	public int getX() {
 		return x;
 	}

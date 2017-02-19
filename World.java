@@ -3,8 +3,8 @@ import java.util.concurrent.locks.*;
 
 public class World {
 
-	final int rows = 10;
-    final int cols = 30;
+	public static final int ROWS = 10; // X is row number
+    public static final int COLS = 30;// Y is col number
     Creature[][] matrix;
 	String unoccupied = "-";
 	//Safety first
@@ -15,7 +15,7 @@ public class World {
 	public World() {
 		
 		// Create a matrix
-		this.matrix = new Creature[rows][cols];
+		this.matrix = new Creature[ROWS][COLS];
 		
 		
 		for (int i = 0; i < this.matrix.length; i++) {
@@ -65,5 +65,10 @@ public class World {
 	}
 	
 	// checkRival method
-	
+	public double rivalFit(int x, int y){
+		
+		double occupier = matrix[x][y].getFitness();
+		
+		return occupier;
+	}
 }
