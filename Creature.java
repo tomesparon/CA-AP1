@@ -32,7 +32,7 @@ public abstract class Creature implements Runnable{
 		return world;
 	}
 	
-
+	
 	
 	
 	

@@ -42,31 +42,35 @@ public class CreatureOne extends Creature{
 		try {
 
 			CreatureOne one = new CreatureOne(getWorld(), x, y);
-			
-			//First generation and add in centre
+
+			// First generation and add in centre
 			one.getWorld().addToWorld(one);
-			//one.getWorld().printWorld();
-			
-			Thread.sleep(span*1000);
-			
+			// one.getWorld().printWorld();
+			// System.err.println(one.getFitness());
+
+			Thread.sleep(span * 1000);
+
 			// Add children (no conditions)
-			for (int nx = x-1 ; nx <=x + 1; nx++) {
-				for (int ny = y-1; ny <= y + 1; ny++) {
+			for (int nx = x - 1; nx <= x + 1; nx++) {
+				for (int ny = y - 1; ny <= y + 1; ny++) {
 
 					one.setX(nx);
 					one.setY(ny);
 					
-					Thread child = new Thread(new CreatureOne(getWorld(), nx, ny));
-					child.start();
-					
+					if (getWorld().itsEmpty(nx, ny)==true && Math.random() <= fitness) {
+						Thread child = new Thread(new CreatureOne(getWorld(), nx, ny));
+						child.start();
+						
+					}
 				}
 			}
 			// Print state with children.
 			one.getWorld().printWorld();
 			
+			Thread.sleep(span * 1000);
 			// Parent dies
 			Thread.currentThread().interrupt();
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

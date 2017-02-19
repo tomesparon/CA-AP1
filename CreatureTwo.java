@@ -41,7 +41,7 @@ public class CreatureTwo extends Creature {
 			CreatureTwo two = new CreatureTwo(getWorld(), x, y);
 
 			two.getWorld().addToWorld(two);
-			two.getWorld().printWorld();
+			//two.getWorld().printWorld();
 			Thread.sleep(span*1000);
 
 			// Add children (no conditions)
@@ -54,7 +54,7 @@ public class CreatureTwo extends Creature {
 
 				}
 			}
-			two.getWorld().printWorld();
+			//two.getWorld().printWorld();
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

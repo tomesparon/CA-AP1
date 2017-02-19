@@ -50,14 +50,18 @@ public class World {
 	
 	//setter? this is a test setWorld
 	public synchronized void addToWorld(Creature creature) {
-		
-			for (int i = 0; i < this.matrix.length; i++) {
-				for (int j = 0; j < this.matrix[0].length; j++) {
-					matrix[creature.getX()][creature.getY()] = creature;
-				}
-			}
+
+		matrix[creature.getX()][creature.getY()] = creature;
+
 	}
 
-	
+	public boolean itsEmpty(int x, int y){
+			
+		if(matrix[x][y]==null){
+			return true;
+		}
+		return false;
+			
+	}
 	
 }
