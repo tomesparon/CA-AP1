@@ -43,7 +43,7 @@ public class World {
 				}
 				System.out.println();
 			}
-			System.out.println("_______________");
+			System.out.println("____________________________^");
 			
 			//System.out.println(Arrays.deepToString(matrix));
 	}

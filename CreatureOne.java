@@ -12,12 +12,9 @@ public class CreatureOne extends Creature{
 		super(world,x,y);
 		this.span = generateLifeSpan();
 		this.fitness = FITLEVEL;
-		//this.x = 0;
+		
 		
 	}  
-
-
-	
 
 
 
@@ -34,86 +31,37 @@ public class CreatureOne extends Creature{
 	}
 	
 	
-	
-
 	@Override
-	public void run(){
+	public int getSpan(){
+		return span;
 		
-		try {
-
-			CreatureOne one = new CreatureOne(getWorld(), x, y);
-
-			// First generation and add in centre
-			one.getWorld().addToWorld(one);
-			one.getWorld().printWorld();
-			// System.err.println(one.getFitness());
-
-			Thread.sleep(span * 1000);
-
-			// Add children (no conditions)
-			for (int nx = x - 1; nx <= x + 1; nx++) {
-				for (int ny = y - 1; ny <= y + 1; ny++) {
-
-					// Change spawn position
-					// Solid Border control if statement
-					if (x < 9 && x > 0 && y < 29 && y > 0) {
-						one.setX(nx);
-						one.setY(ny);
-						
-						
-						// Important or else billions of threads are created
-						// regardless.
-						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= one.getFitness()) {
-							Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
-							child.start();
-
-						} else if (getWorld().itsEmpty(nx, ny) == false && Math.random() <= one.getFitness()-getWorld().rivalFit(nx, ny)) {
-							// Create a child based on fit diff and murder
-							//System.err.println(getWorld().rivalFit(nx, ny));
-							Thread child = new Thread(new CreatureOne(getWorld(), one.getX(), one.getY()));
-							child.start();
-							
-						}
-						
-						
-					}
-
-					
-				}
-			}
-			// Print state with children.
-			one.getWorld().printWorld();
-			//Another sleep...
-			//Thread.sleep(span * 1000);
-			// Parent dies
-			Thread.currentThread().interrupt();
-
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-				
-			
-
-
-
 	}
 
-
-
-
-
-
+	
 	@Override
-	double getFitness() {
+	public double getFitness() {
 		// TODO Auto-generated method stub
 		return fitness;
 	}
 	
+	@Override
+	public Creature makeCreature() {
+		Creature one = new CreatureOne(getWorld(), x, y);
+		return one;
+	}
+	
+	// Fetch string representation of creature.
 	public String toString(){
 		return itsName;
 		
+	}
+
+
+
+	@Override
+	public Creature createChild(int i, int j) {
+		Creature child = new CreatureOne(getWorld(), i, j);
+		return child;
 	}
 	
 
