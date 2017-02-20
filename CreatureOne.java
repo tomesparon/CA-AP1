@@ -17,7 +17,7 @@ public class CreatureOne extends Creature{
 	}  
 
 
-
+	// Debugging object description method
 	public String description() {
 		String ds = "A new creature 1 spawned with fitness " + fitness + ",Span of " + span;
 		return ds;

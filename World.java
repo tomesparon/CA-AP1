@@ -45,7 +45,7 @@ public class World {
 			}
 			System.out.println("____________________________^");
 			
-			//System.out.println(Arrays.deepToString(matrix));
+			
 	}
 	
 	//setter? this is a test setWorld

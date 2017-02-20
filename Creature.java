@@ -1,12 +1,27 @@
+/*			
+ * 
+ * 
+ * 		|Access Levels Cheat Sheet|
+ * 		Modifier	Class	Package	Subclass	World
+ * 		public		Y		Y		Y			Y
+ * 		protected	Y		Y		Y			N
+ * 		no modifier	Y		Y		N			N
+ * 		private		Y		N		N			N
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
 
 public abstract class Creature implements Runnable{
-	// Needed stuff
-	protected final World world;
 	
-	protected int span;
-	
-	protected int x;
-	protected int y;
+	protected final World world;// The one and only world. A shared object
+	//protected int span;			// THIS DOESN@T WORK!!
+	protected int x;			// x-row position of creature
+	protected int y;			// y-col position of creature
 	
 	
 	public Creature(World world, int xin, int yin) {
@@ -19,97 +34,96 @@ public abstract class Creature implements Runnable{
 		
 	}
 	// Must implement these in each subclass..
+	// Methods differ in their outputs
 	abstract int generateLifeSpan();
 	abstract double getFitness();
 	abstract Creature makeCreature();
 	abstract Creature createChild(int i, int j);
+	abstract String description();
 	
-	public World getWorld() {
+	protected World getWorld() {
 		return world;
 	}
 	
-	
-	public int getSpan() {
-		return span;
+	// Get life-span from a subclass
+	protected int getSpan() {
+		return generateLifeSpan();
 	}
-	
-	// Should i synchronized ??
-	public int getX() {
+	// Should i synchronised ??
+	protected int getX() {
 		return x;
 	}
-	public void setX(int x) {
+	protected void setX(int x) {
 		this.x = x;
 	}
-	public int getY() {
+	protected int getY() {
 		return y;
 	}
-	public void setY(int y) {
+	protected void setY(int y) {
 		this.y = y;
 	}
 	
 	
-	public void run(){
-		
+	public void run() {
+
 		try {
-			// @TODO change 'one' to creature.
-			Creature one = makeCreature();
+			// Create a parent to start
+			Creature creature = makeCreature();
+
+			// Add parent to the world
+			creature.getWorld().addToWorld(creature);
+			// Print state of the world
+			creature.getWorld().printWorld();
 			
-
-			// First generation and add in centre
-			one.getWorld().addToWorld(one);
-			one.getWorld().printWorld();
-			// System.err.println(one.getFitness());
-
-			Thread.sleep(getSpan() *  1000);
-			//System.err.println("--------------------------" + getSpan());
-			// Add children (no conditions)
+			// Parent lives for its life-span
+			//DEBUGING: System.err.println(creature.description());
+			Thread.sleep(getSpan() * 1000);
+			System.err.println(getSpan());
+			
+			/*Adding children loop
+			 * 
+			 * This 2D for loop checks if a child can be placed around the parent in a +1 perimeter.
+			 * Each round of the loop, change the new x,y coordinate (nx,ny)
+			 * 
+			 * */
 			for (int nx = x - 1; nx <= x + 1; nx++) {
 				for (int ny = y - 1; ny <= y + 1; ny++) {
 
-					// Change spawn position
-					// Solid Border control if statement
+					//TODO Solid Border control if statement. WIP: does not work on edges...
 					if (x < 9 && x > 0 && y < 29 && y > 0) {
-						one.setX(nx);
-						one.setY(ny);
-						
-						
-						// Important or else billions of threads are created
-						// regardless.
-						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= one.getFitness()) {
-							Thread child = new Thread(createChild(one.getX(),one.getY()));
+						// Set new square where parent can give birth.. (O.O)
+						creature.setX(nx);
+						creature.setY(ny);
+
+						// !Important or else too many threads are created!
+						// If the perimeter is empty, roll dice to place child in square.
+						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
+							// New creature thread that gets passed the coordinates of current loop.
+							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
 							child.start();
 
-						} else if (getWorld().itsEmpty(nx, ny) == false && Math.random() <= one.getFitness()-getWorld().rivalFit(nx, ny)) {
-							// Create a child based on fit diff and murder
-							//System.err.println(getWorld().rivalFit(nx, ny));
-							Thread child = new Thread(createChild(one.getX(),one.getY()));
-							child.start();
+						} else if (getWorld().itsEmpty(nx, ny) == false
+								&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
 							
+							// Create a child based on fitness difference between parent and occupant.
+							// TODO New logic... getThread of square and kill.
+							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
+							child.start();
+
 						}
-						
-						
+
 					}
 
-					
 				}
 			}
-			// Print state with children.
-			//one.getWorld().printWorld();
-			//Another sleep...
-			//Thread.sleep(span * 1000);
-			// Parent dies
+			
+			// After all that birth, Parent Thread dies.
 			Thread.currentThread().interrupt();
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-			
 	}
-	
-	
-
-	
 	
 }

@@ -14,11 +14,9 @@ public class CreatureTwo extends Creature {
 		this.fitness = FITLEVEL;
 	}
 
-//	private double fitness;
-//	private int lifespan;
+
 	
-	
-	
+	// Debugging object description method
 	public String description() {
 		String ds = "A new creature 2 spawned with fitness " + fitness + ",Span of " + span;
 		return ds;
