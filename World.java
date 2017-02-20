@@ -7,9 +7,10 @@ public class World {
     public static final int COLS = 30;// Y is col number
     Creature[][] matrix;
 	String unoccupied = "-";
+	
 	//Safety first
-	private ReentrantLock worldLock = new ReentrantLock();
-	private Condition condition = worldLock.newCondition();
+	//private ReentrantLock worldLock = new ReentrantLock();
+	//private Condition condition = worldLock.newCondition();
 	//private boolean placing = false; // to begin with.
     
 	public World() {
