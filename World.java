@@ -35,18 +35,21 @@ public class World {
 	 */
 	public synchronized void printWorld(){
 		
-			
+		int total = 0;
+		
 			for (int i = 0; i < this.matrix.length; i++) {
 				for (int j = 0; j < this.matrix[0].length; j++) {
 					if(matrix[i][j]==null){
 						System.out.print(unoccupied);
-					}else
+					}else{
 						System.out.print(matrix[i][j]);
+						total++;
+					}
 				}
 				System.out.println();
 			}
 			// A marker for the bottom of a map
-			System.out.println("____________________________^");
+			System.out.println("_____________________________^ Total Pop:" + total);
 			
 			
 	}
