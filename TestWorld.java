@@ -16,11 +16,27 @@ public class TestWorld {
 		// On your marks...
 		first.start();
 		second.start();
+		
+		//Sleep main 
+		try {
+			for(;;){
+			world.printWorld();
+		    Thread.sleep(500);
+			}
+		} catch (InterruptedException e) {
+		    //handle
+			
+		}
 
 		
-		
 	}
-	
-	
+	// this might be a useful flag...
+//	void run()
+//	{
+//	    while(!Thread.interrupted())
+//	    {
+//	        //Do something
+//	    }
+//	}
 	
 }

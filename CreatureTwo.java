@@ -28,63 +28,6 @@ public class CreatureTwo extends Creature {
 		int span = rn.nextInt(MAXLIFE);
 		return span;
 	}
-	// MERGE INTO THE CREATURE EXTENDED CLASS!!!!!
-//	@Override
-//	public void run() {
-//		
-//		
-//		
-//		try {
-//
-//			CreatureTwo two = new CreatureTwo(getWorld(), x, y);
-//
-//			// First generation and add in centre
-//			two.getWorld().addToWorld(two);
-//			two.getWorld().printWorld();
-//			// System.err.println(two.getFitness());
-//			//System.err.println(span);
-//			Thread.sleep(span * 1000);
-//
-//			// Add children (no conditions)
-//			for (int nx = x - 1; nx <= x + 1; nx++) {
-//				for (int ny = y - 1; ny <= y + 1; ny++) {
-//					
-//					// Change spawn position
-//					// Solid Border control if statement
-//					if (x < 9 && x > 0 && y < 29 && y > 0) {
-//						two.setX(nx);
-//						two.setY(ny);
-//
-//						// Important or else billions of threads are created
-//						// regardless.
-//						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= two.getFitness()) {
-//							Thread child = new Thread(new CreatureTwo(getWorld(), two.getX(), two.getY()));
-//							child.start();
-//							
-//						} else if (getWorld().itsEmpty(nx, ny) == false && Math.random() <= two.getFitness()-getWorld().rivalFit(nx, ny)) {
-//							// Create a child based on fit diff and murder
-//							//System.err.println(getWorld().rivalFit(nx, ny));
-//							Thread child = new Thread(new CreatureOne(getWorld(), two.getX(), two.getY()));
-//							child.start();
-//						}
-//					}
-//					
-//				}
-//			}
-//			// Print state with children.
-//			two.getWorld().printWorld();
-//			// Another sleep...
-//			//Thread.sleep(span * 1000);
-//			// Parent dies
-//			Thread.currentThread().interrupt();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//				
-//			
-//
-//	}
 	
 	@Override
 	public int getSpan(){

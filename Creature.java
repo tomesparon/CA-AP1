@@ -66,62 +66,78 @@ public abstract class Creature implements Runnable{
 	
 	public void run() {
 
+		//System.err.println(Thread.currentThread().getId());
 		try {
-			// Create a parent to start
-			Creature creature = makeCreature();
+			while (!Thread.interrupted()) {
+				// Create a parent to start
+				Creature creature = makeCreature();
+				
+				// Add parent to the world
+				creature.getWorld().addToWorld(creature);
+				// Print state of the world
+				// creature.getWorld().printWorld();
 
-			// Add parent to the world
-			creature.getWorld().addToWorld(creature);
-			// Print state of the world
-			creature.getWorld().printWorld();
-			
-			// Parent lives for its life-span
-			//DEBUGING: System.err.println(creature.description());
-			Thread.sleep(getSpan() * 1000);
-			System.err.println(getSpan());
-			
-			/*Adding children loop
-			 * 
-			 * This 2D for loop checks if a child can be placed around the parent in a +1 perimeter.
-			 * Each round of the loop, change the new x,y coordinate (nx,ny)
-			 * 
-			 * */
-			for (int nx = x - 1; nx <= x + 1; nx++) {
-				for (int ny = y - 1; ny <= y + 1; ny++) {
+				// Parent lives for its life-span
+				// DEBUGING: System.err.println(creature.description());
+				// System.err.println(getSpan());
+				Thread.sleep(getSpan() * 1000);
 
-					//TODO Solid Border control if statement. WIP: does not work on edges...
-					if (x < 9 && x > 0 && y < 29 && y > 0) {
-						// Set new square where parent can give birth.. (O.O)
-						creature.setX(nx);
-						creature.setY(ny);
+				/*
+				 * Adding children loop
+				 * 
+				 * This 2D for loop checks if a child can be placed around the
+				 * parent in a +1 perimeter. Each round of the loop, change the
+				 * new x,y coordinate (nx,ny)
+				 * 
+				 */
+				for (int nx = x - 1; nx <= x + 1; nx++) {
+					for (int ny = y - 1; ny <= y + 1; ny++) {
 
-						// !Important or else too many threads are created!
-						// If the perimeter is empty, roll dice to place child in square.
-						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
-							// New creature thread that gets passed the coordinates of current loop.
-							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
-							child.start();
+						// TODO Solid Border control if statement. WIP: does not
+						// work on edges...
+						if (x < 9 && x > 0 && y < 29 && y > 0) {
+							// Set new square where parent can give birth..
+							// (O.O)
+							creature.setX(nx);
+							creature.setY(ny);
 
-						} else if (getWorld().itsEmpty(nx, ny) == false
-								&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
-							
-							// Create a child based on fitness difference between parent and occupant.
-							// TODO New logic... getThread of square and kill.
-							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
-							child.start();
+							// !Important or else too many threads are created!
+							// If the perimeter is empty, roll dice to place
+							// child in square.
+							if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
+								// New creature thread that gets passed the
+								// coordinates of current loop.
+								Thread child = new Thread(creature.createChild(creature.getX(), creature.getY()));
+								child.start();
+
+							} else if (getWorld().itsEmpty(nx, ny) == false
+									&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
+
+								// Create a child based on fitness difference
+								// between parent and occupant.
+								// TODO New logic... getThread of square and
+								// kill.
+								Thread child = new Thread(creature.createChild(creature.getX(), creature.getY()));
+								child.start();
+								
+							}
 
 						}
 
 					}
-
 				}
+				
 			}
 			
-			// After all that birth, Parent Thread dies.
-			Thread.currentThread().interrupt();
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+		finally
+		{
+			// After all that birth,Interrupt thread- Parent Thread dies.
+			
+			Thread.currentThread().interrupt();
 		}
 
 	}

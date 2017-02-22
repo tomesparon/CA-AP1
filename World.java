@@ -19,13 +19,14 @@ public class World {
 		this.matrix = new Creature[ROWS][COLS];
 		
 		
-		for (int i = 0; i < this.matrix.length; i++) {
-			for (int j = 0; j < this.matrix[0].length; j++) {
-				
-				matrix[i][j] = null;
-			}
-		}
-		
+//		for (int i = 0; i < this.matrix.length; i++) {
+//			for (int j = 0; j < this.matrix[0].length; j++) {
+//				
+//				matrix[i][j]= null;
+//				//matrix[i][0]= new CreatureOne( get rid of world param. i,j);
+//			}
+//		}
+//		
 	}
     
 	
@@ -44,6 +45,7 @@ public class World {
 				}
 				System.out.println();
 			}
+			// A marker for the bottom of a map
 			System.out.println("____________________________^");
 			
 			
@@ -56,7 +58,7 @@ public class World {
 
 	}
 
-	public boolean itsEmpty(int x, int y){
+	public synchronized boolean itsEmpty(int x, int y){
 			
 		if(matrix[x][y]==null){
 			return true;
@@ -66,7 +68,7 @@ public class World {
 	}
 	
 	// checkRival method
-	public double rivalFit(int x, int y){
+	public synchronized double rivalFit(int x, int y){
 		
 		double occupier = matrix[x][y].getFitness();
 		
