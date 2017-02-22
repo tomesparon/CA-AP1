@@ -1,25 +1,8 @@
-/*			
- * 
- * 
- * 		|Access Levels Cheat Sheet|
- * 		Modifier	Class	Package	Subclass	World
- * 		public		Y		Y		Y			Y
- * 		protected	Y		Y		Y			N
- * 		no modifier	Y		Y		N			N
- * 		private		Y		N		N			N
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * */
+
 
 public abstract class Creature implements Runnable{
 	
 	protected final World world;// The one and only world. A shared object
-	//protected int span;			// THIS DOESN@T WORK!!
 	protected int x;			// x-row position of creature
 	protected int y;			// y-col position of creature
 	
@@ -34,12 +17,12 @@ public abstract class Creature implements Runnable{
 		
 	}
 	// Must implement these in each subclass..
-	// Methods differ in their outputs
+	// Subclass Methods differ in their outputs
 	abstract int generateLifeSpan();
 	abstract double getFitness();
 	abstract Creature makeCreature();
 	abstract Creature createChild(int i, int j);
-	abstract String description();
+	
 	
 	protected World getWorld() {
 		return world;
@@ -76,9 +59,8 @@ public abstract class Creature implements Runnable{
 			creature.getWorld().printWorld();
 			
 			// Parent lives for its life-span
-			//DEBUGING: System.err.println(creature.description());
 			Thread.sleep(getSpan() * 1000);
-			//System.err.println(getSpan());
+			
 			
 			/*Adding children loop
 			 * 
@@ -95,20 +77,22 @@ public abstract class Creature implements Runnable{
 						creature.setX(nx);
 						creature.setY(ny);
 
-						// !Important or else too many threads are created!
+						// Determine chance of placing a new child
 						// If the perimeter is empty, roll dice to place child in square.
 						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
 							// New creature thread that gets passed the coordinates of current loop.
-							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
+							Thread child = new Thread(createChild(nx,ny));
 							child.start();
+							
 
 						} else if (getWorld().itsEmpty(nx, ny) == false
 								&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
-							
-							// Create a child based on fitness difference between parent and occupant.
-							// TODO New logic... getThread of square and kill.
-							Thread child = new Thread(createChild(creature.getX(), creature.getY()));
+							// Remove the occupant if condition met
+							creature.getWorld().killOccupant(creature,nx,ny);
+							// Start a new thread, that places the creature 
+							Thread child = new Thread(createChild(nx,ny));
 							child.start();
+							
 
 						}
 
@@ -117,11 +101,13 @@ public abstract class Creature implements Runnable{
 				}
 			}
 			
-			// After all that birth, Parent Thread dies.
-			Thread.currentThread().interrupt();
+			
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}finally{
+			// Thread interrupts itself ie. parent dies
+			Thread.currentThread().interrupt();
 		}
 
 	}

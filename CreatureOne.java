@@ -17,12 +17,6 @@ public class CreatureOne extends Creature{
 	}  
 
 
-	// Debugging object description method
-	public String description() {
-		String ds = "A new creature 1 spawned with fitness " + fitness + ",Span of " + span;
-		return ds;
-	}
-
 	@Override
 	public int generateLifeSpan() {
 		Random rn = new Random();
@@ -55,8 +49,6 @@ public class CreatureOne extends Creature{
 		return itsName;
 		
 	}
-
-
 
 	@Override
 	public Creature createChild(int i, int j) {

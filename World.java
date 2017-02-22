@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.concurrent.locks.*;
 
 public class World {
 
@@ -8,33 +6,20 @@ public class World {
     Creature[][] matrix;
 	String unoccupied = "-";
 	
-	//Safety first
-	//private ReentrantLock worldLock = new ReentrantLock();
-	//private Condition condition = worldLock.newCondition();
-	//private boolean placing = false; // to begin with.
     
 	public World() {
 		
-		// Create a matrix
+		// Create a creature matrix
 		this.matrix = new Creature[ROWS][COLS];
 		
-		
-//		for (int i = 0; i < this.matrix.length; i++) {
-//			for (int j = 0; j < this.matrix[0].length; j++) {
-//				
-//				matrix[i][j]= null;
-//				//matrix[i][0]= new CreatureOne( get rid of world param. i,j);
-//			}
-//		}
-//		
 	}
     
-	
 	/**
-	 * Displays the world as it stands getWorld
+	 * Displays the world as it stands.Synchronized so world is not changed when in method.
 	 */
 	public synchronized void printWorld(){
 		
+		// Simple total counter
 		int total = 0;
 		
 			for (int i = 0; i < this.matrix.length; i++) {
@@ -48,19 +33,27 @@ public class World {
 				}
 				System.out.println();
 			}
-			// A marker for the bottom of a map
+			// A marker for the bottom of a map and Print out of total pop
 			System.out.println("_____________________________^ Total Pop:" + total);
 			
 			
 	}
 	
-	//setter? this is a test setWorld
+	//Setter method that allows a creature to be added
 	public synchronized void addToWorld(Creature creature) {
 
 		matrix[creature.getX()][creature.getY()] = creature;
 
 	}
+	
+	//Setter method that allows a creature to be killed
+	public synchronized void killOccupant(Creature creature, int nx, int ny) {
 
+		matrix[nx][ny] = null;
+
+	}
+	
+	//A boolean method to check if the square is occupied or not
 	public synchronized boolean itsEmpty(int x, int y){
 			
 		if(matrix[x][y]==null){
@@ -70,11 +63,13 @@ public class World {
 			
 	}
 	
-	// checkRival method
+	//A boolean method to check the queried occupiers fitness
 	public synchronized double rivalFit(int x, int y){
 		
-		double occupier = matrix[x][y].getFitness();
+		double occupierFit = matrix[x][y].getFitness();
 		
-		return occupier;
+		return occupierFit;
 	}
+	
+	
 }

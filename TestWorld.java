@@ -3,20 +3,26 @@ public class TestWorld {
 
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		       
 
 		World world = new World();
-		Runnable species1 = new CreatureOne(world,1,1); //starting coordinates
-		Runnable species2 = new CreatureTwo(world,5,28);// starting coordinates
-		Thread first = new Thread(species1);
-		Thread second = new Thread(species2);
+		Runnable parentOne = new CreatureOne(world,1,1); //starting coordinates
+		Runnable parentTwo = new CreatureTwo(world,5,28);// starting coordinates
+		Thread first = new Thread(parentOne);
+		Thread second = new Thread(parentTwo);
 		
-		// On your marks...
+		// Start both threads.
 		first.start();
 		second.start();
-
+		
+		
+//		for(;;){
+//			
+//			world.printWorld();
+//			Thread.sleep(500);
+//		}
 		
 		
 	}
