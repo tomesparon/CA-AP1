@@ -23,7 +23,7 @@ public abstract class Creature implements Runnable{
 	abstract Creature makeCreature();
 	abstract Creature createChild(int i, int j);
 	
-	
+	// Might not need this.
 	protected World getWorld() {
 		return world;
 	}
@@ -54,12 +54,11 @@ public abstract class Creature implements Runnable{
 			Creature creature = makeCreature();
 
 			// Add parent to the world
-			creature.getWorld().addToWorld(creature);
-			// Print state of the world
-			creature.getWorld().printWorld();
 			
+			this.world.addToWorld(creature, creature.getX(), creature.getY());
 			// Parent lives for its life-span
 			Thread.sleep(getSpan() * 1000);
+			
 			
 			
 			/*Adding children loop
@@ -79,7 +78,7 @@ public abstract class Creature implements Runnable{
 
 						// Determine chance of placing a new child
 						// If the perimeter is empty, roll dice to place child in square.
-						if (getWorld().itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
+						if (this.world.itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
 							// New creature thread that gets passed the coordinates of current loop.
 							Thread child = new Thread(createChild(nx,ny));
 							child.start();
@@ -88,7 +87,7 @@ public abstract class Creature implements Runnable{
 						} else if (getWorld().itsEmpty(nx, ny) == false
 								&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
 							// Remove the occupant if condition met
-							creature.getWorld().killOccupant(creature,nx,ny);
+							this.world.killOccupant(creature,nx,ny);
 							// Start a new thread, that places the creature 
 							Thread child = new Thread(createChild(nx,ny));
 							child.start();

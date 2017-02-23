@@ -1,5 +1,5 @@
 
-public class World {
+public abstract class World {
 
 	public static final int ROWS = 10; // X is row number
     public static final int COLS = 30;// Y is col number
@@ -40,7 +40,7 @@ public class World {
 	}
 	
 	//Setter method that allows a creature to be added
-	public synchronized void addToWorld(Creature creature) {
+	public synchronized void addToWorld(Creature creature,int x, int y) {
 
 		matrix[creature.getX()][creature.getY()] = creature;
 

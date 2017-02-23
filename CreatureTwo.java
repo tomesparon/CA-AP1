@@ -43,13 +43,13 @@ public class CreatureTwo extends Creature {
 
 	@Override
 	public Creature makeCreature() {
-		Creature two = new CreatureTwo(getWorld(), x, y);
+		Creature two = new CreatureTwo(world, x, y);
 		return two;
 	}
 
 	@Override
 	public Creature createChild(int i, int j) {
-		Creature child = new CreatureTwo(getWorld(), i, j);
+		Creature child = new CreatureTwo(world, i, j);
 		return child;
 	}
 	

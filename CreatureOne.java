@@ -40,7 +40,7 @@ public class CreatureOne extends Creature{
 	
 	@Override
 	public Creature makeCreature() {
-		Creature one = new CreatureOne(getWorld(), x, y);
+		Creature one = new CreatureOne(world, x, y);
 		return one;
 	}
 	
@@ -52,7 +52,7 @@ public class CreatureOne extends Creature{
 
 	@Override
 	public Creature createChild(int i, int j) {
-		Creature child = new CreatureOne(getWorld(), i, j);
+		Creature child = new CreatureOne(world, i, j);
 		return child;
 	}
 	
