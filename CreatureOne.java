@@ -5,6 +5,8 @@ public class CreatureOne extends Creature{
 	private final static int MAXLIFE = 10;
 	private final static double FITLEVEL = 0.8;
 	private String itsName = "1";
+	
+	//Stores for creature attributes
 	private int span;
 	private double fitness;
 	

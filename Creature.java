@@ -9,7 +9,7 @@ public abstract class Creature implements Runnable{
 	
 	public Creature(World world, int xin, int yin) {
 	
-		
+		// Sets the world passed to world.populate
 		this.world = world;
 		x = xin;
 		y = yin;
@@ -24,9 +24,9 @@ public abstract class Creature implements Runnable{
 	abstract Creature createChild(int i, int j);
 	
 	// Might not need this.
-	protected World getWorld() {
-		return world;
-	}
+//	protected World getWorld() {
+//		return world;
+//	}
 	
 	// Get life-span from a subclass
 	protected int getSpan() {
@@ -78,14 +78,14 @@ public abstract class Creature implements Runnable{
 
 						// Determine chance of placing a new child
 						// If the perimeter is empty, roll dice to place child in square.
-						if (this.world.itsEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
+						if (this.world.isEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
 							// New creature thread that gets passed the coordinates of current loop.
 							Thread child = new Thread(createChild(nx,ny));
 							child.start();
 							
 
-						} else if (getWorld().itsEmpty(nx, ny) == false
-								&& Math.random() <= creature.getFitness() - getWorld().rivalFit(nx, ny)) {
+						} else if (this.world.isEmpty(nx, ny) == false
+								&& Math.random() <= creature.getFitness() - this.world.rivalFit(nx, ny)) {
 							// Remove the occupant if condition met
 							this.world.killOccupant(creature,nx,ny);
 							// Start a new thread, that places the creature 
@@ -97,8 +97,8 @@ public abstract class Creature implements Runnable{
 
 					}
 
-				}
-			}
+				}// end of for-y
+			} // end of for-x 
 			
 			
 

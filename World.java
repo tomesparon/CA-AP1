@@ -2,15 +2,15 @@ import java.util.Random;
 
 public abstract class World {
 
-	public static final int ROWS = 10; // X is row number
-    public static final int COLS = 30;// Y is col number
+	public static final int ROWS = 10; // The number of rows down
+    public static final int COLS = 30; // The number of columns across
     Creature[][] matrix;
 	String unoccupied = "-";
 	
     
 	public World() {
 		
-		// Create a creature matrix
+		// Initialise the creature matrix
 		this.matrix = new Creature[ROWS][COLS];
 		
 	}
@@ -26,9 +26,12 @@ public abstract class World {
 			for (int i = 0; i < this.matrix.length; i++) {
 				for (int j = 0; j < this.matrix[0].length; j++) {
 					if(matrix[i][j]==null){
+						// null, no creature, so marked as '-'
 						System.out.print(unoccupied);
 					}else{
+						// creature present. Prints its string representation
 						System.out.print(matrix[i][j]);
+						// Add up current inhabitants
 						total++;
 					}
 				}
@@ -47,7 +50,7 @@ public abstract class World {
 
 	}
 	
-	//Setter method that allows a creature to be killed
+	//Setter method that should allow a creature to be killed
 	public synchronized void killOccupant(Creature creature, int nx, int ny) {
 
 		matrix[nx][ny] = null;
@@ -55,7 +58,7 @@ public abstract class World {
 	}
 	
 	//A boolean method to check if the square is occupied or not
-	public synchronized boolean itsEmpty(int x, int y){
+	public synchronized boolean isEmpty(int x, int y){
 			
 		if(matrix[x][y]==null){
 			return true;
@@ -72,6 +75,7 @@ public abstract class World {
 		return occupierFit;
 	}
 	
+	// A method to initially place inhabitants into world
 	public synchronized void populate(World world){
 		
 		for (int i = 0; i < ROWS; i++) {
@@ -98,6 +102,7 @@ public abstract class World {
 		}
 	}
 	
+	// Helper method to make a random number in a range.
 	public static int randomGen(int min, int max) {
 		Random rn = new Random();
 		int range = max - min + 1;
