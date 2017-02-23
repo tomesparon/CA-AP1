@@ -70,8 +70,8 @@ public abstract class Creature implements Runnable{
 			for (int nx = x - 1; nx <= x + 1; nx++) {
 				for (int ny = y - 1; ny <= y + 1; ny++) {
 
-					//TODO Solid Border control if statement. WIP: does not work on edges...
-					if (x < 9 && x > 0 && y < 29 && y > 0) {
+					//TODO Solid Border control if statement. 
+					if (( nx >= 0 && nx < 10) && (ny >= 0 && ny < 30)) {
 						// Set new square where parent can give birth.. (O.O)
 						creature.setX(nx);
 						creature.setY(ny);

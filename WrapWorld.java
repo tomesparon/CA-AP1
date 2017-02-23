@@ -12,7 +12,11 @@ public class WrapWorld extends World{
 	}
     
 	
-	
+	@Override
+	public void borderControl() {
+		//probably boolean return
+		
+	}
 	
 	//Setter method that allows a creature to be added
 	public synchronized void addToWorld(Creature creature) {
@@ -45,6 +49,11 @@ public class WrapWorld extends World{
 		
 		return occupierFit;
 	}
+
+
+
+
+	
 	
 	
 	

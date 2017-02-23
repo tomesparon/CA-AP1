@@ -14,6 +14,8 @@ public abstract class World {
 		this.matrix = new Creature[ROWS][COLS];
 		
 	}
+	// Each world subclass has its own rules for borders
+	public abstract void borderControl();
     
 	/**
 	 * Displays the world as it stands.Synchronized so world is not changed when in method.
