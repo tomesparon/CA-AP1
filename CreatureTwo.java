@@ -8,7 +8,7 @@ public class CreatureTwo extends Creature {
 	private int span;
 	private double fitness;
 
-	public CreatureTwo( World world, int x, int y) {
+	public CreatureTwo(World world, int x, int y) {
 		super(world,x,y);
 		this.span = generateLifeSpan();
 		this.fitness = FITLEVEL;

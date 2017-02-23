@@ -105,7 +105,7 @@ public abstract class Creature implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally{
-			// Thread interrupts itself ie. parent dies
+			// Thread interrupts itself ,hopefully this causes parent to die
 			Thread.currentThread().interrupt();
 		}
 

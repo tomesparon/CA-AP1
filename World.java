@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public abstract class World {
 
@@ -71,5 +72,37 @@ public abstract class World {
 		return occupierFit;
 	}
 	
+	public synchronized void populate(World world){
+		
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
+
+				int random = randomGen(0, 2);
+
+				if (random == 1) {
+					// Create a creature thread of the first type
+					Runnable creatureOne = new CreatureOne(world, i, j);
+					Thread thread = new Thread(creatureOne);
+					thread.start();
+				} else if (random == 2) {
+					// Create a creature thread of the second type
+					Runnable creatureTwo = new CreatureTwo(world, i, j);
+					Thread thread = new Thread(creatureTwo);
+					thread.start();
+
+				} else {
+					continue;
+				}
+
+			}
+		}
+	}
+	
+	public static int randomGen(int min, int max) {
+		Random rn = new Random();
+		int range = max - min + 1;
+		int randomNum =  rn.nextInt(range) + min;
+		return randomNum;
+	}
 	
 }
