@@ -70,17 +70,15 @@ public abstract class Creature implements Runnable{
 			for (int nx = x - 1; nx <= x + 1; nx++) {
 				for (int ny = y - 1; ny <= y + 1; ny++) {
 					
-					//creature.setX(nx);
-					//creature.setY(ny);
+					
 					// Border control if statement. Changes condition on different world
-					if(this.world.borderControl(nx, ny, creature)==true) {
-						// Set new square where parent can give birth.. (O.O)
+					if(this.world.borderControl(nx, ny)==true) {
 						
-
+						
 						// Determine chance of placing a new child
 						// If the perimeter is empty, roll dice to place child in square.
 						if (this.world.isEmpty(nx, ny) == true && Math.random() <= creature.getFitness()) {
-							// New creature thread that gets passed the coordinates of current loop.
+							
 							creature.setX(nx);
 							creature.setY(ny);
 							Thread child = new Thread(createChild(creature.getX(),creature.getY()));

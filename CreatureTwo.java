@@ -1,22 +1,20 @@
 import java.util.Random;
 
 public class CreatureTwo extends Creature {
-	
+
 	private final static int MAXLIFE = 5;
 	private final static double FITLEVEL = 0.4;
 	private String itsName = "2";
-	
-	//Stores for creature attributes
+
+	// Stores for creature attributes
 	private int span;
 	private double fitness;
 
 	public CreatureTwo(World world, int x, int y) {
-		super(world,x,y);
+		super(world, x, y);
 		this.span = generateLifeSpan();
 		this.fitness = FITLEVEL;
 	}
-
-
 
 	@Override
 	public int generateLifeSpan() {
@@ -24,12 +22,11 @@ public class CreatureTwo extends Creature {
 		int span = rn.nextInt(MAXLIFE);
 		return span;
 	}
-	
-	
+
 	@Override
-	public int getSpan(){
+	public int getSpan() {
 		return span;
-		
+
 	}
 
 	@Override
@@ -37,10 +34,10 @@ public class CreatureTwo extends Creature {
 		// TODO Auto-generated method stub
 		return fitness;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return itsName;
-		
+
 	}
 
 	@Override
@@ -54,8 +51,5 @@ public class CreatureTwo extends Creature {
 		Creature child = new CreatureTwo(world, i, j);
 		return child;
 	}
-	
-	
 
 }
-
