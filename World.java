@@ -15,7 +15,7 @@ public abstract class World {
 		
 	}
 	// Each world subclass has its own rules for borders
-	public abstract void borderControl();
+	public abstract boolean borderControl(int nx, int ny);
     
 	/**
 	 * Displays the world as it stands.Synchronized so world is not changed when in method.

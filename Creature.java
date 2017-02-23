@@ -70,8 +70,8 @@ public abstract class Creature implements Runnable{
 			for (int nx = x - 1; nx <= x + 1; nx++) {
 				for (int ny = y - 1; ny <= y + 1; ny++) {
 
-					//TODO Solid Border control if statement. 
-					if (( nx >= 0 && nx < 10) && (ny >= 0 && ny < 30)) {
+					// Border control if statement. Changes condition on different world
+					if(this.world.borderControl(nx, ny)==true) {
 						// Set new square where parent can give birth.. (O.O)
 						creature.setX(nx);
 						creature.setY(ny);

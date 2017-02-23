@@ -12,8 +12,13 @@ public class EdgeWorld extends World {
 	}
 	
 	@Override
-	public void borderControl() {
-		//probably boolean return
+	public synchronized boolean borderControl(int nx, int ny) {
+		
+		if ((nx >= 0 && nx < ROWS) && (ny >= 0 && ny < COLS)) {
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 	

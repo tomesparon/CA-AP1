@@ -13,7 +13,8 @@ public class WrapWorld extends World{
     
 	
 	@Override
-	public void borderControl() {
+	public boolean borderControl(int nx, int ny) {
+		return false;
 		//probably boolean return
 		
 	}
