@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * 
+ *  A creature, called Two has a max life of 5 and a fitlevel of 0.4
+ * @author Tom Esparon
+ *
+ */
 public class CreatureTwo extends Creature {
 
 	private final static int MAXLIFE = 5;
@@ -31,7 +37,6 @@ public class CreatureTwo extends Creature {
 
 	@Override
 	double getFitness() {
-		// TODO Auto-generated method stub
 		return fitness;
 	}
 
