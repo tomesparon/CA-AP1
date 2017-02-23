@@ -10,8 +10,8 @@ public abstract class World {
 
 	public static final int ROWS = 10; // The number of rows down
 	public static final int COLS = 50; // The number of columns across
-	Creature[][] matrix;
-	String unoccupied = "-";
+	protected Creature[][] matrix;
+	protected String unoccupied = "-";
 
 	public World() {
 
