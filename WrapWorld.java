@@ -1,4 +1,10 @@
 
+/**
+ * A subclass of World. Its borderControl method allows for a wrap-around
+ * This class currently does not operate completely.
+ * @author Tom Esparon
+ *
+ */
 public class WrapWorld extends World {
 
 	public WrapWorld() {

@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * A abstract class for the simulation World.
+ * It creates a 2D array of creatures and populates the world initially.
+ * @author Tom Esparon
+ *
+ */
 public abstract class World {
 
 	public static final int ROWS = 10; // The number of rows down

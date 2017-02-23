@@ -1,4 +1,9 @@
 
+/**
+ * A subclass of World. Its borderControl method allows for a rigid walled world.
+ * @author Tom Esparon
+ *
+ */
 public class EdgeWorld extends World {
 
 	public EdgeWorld() {
