@@ -15,7 +15,7 @@ public abstract class World {
 		
 	}
 	// Each world subclass has its own rules for borders
-	public abstract boolean borderControl(int nx, int ny);
+	public abstract boolean borderControl(int nx, int ny, Creature creature);
     
 	/**
 	 * Displays the world as it stands.Synchronized so world is not changed when in method.
@@ -87,12 +87,12 @@ public abstract class World {
 
 				if (random == 1) {
 					// Create a creature thread of the first type
-					Runnable creatureOne = new CreatureOne(world, i, j);
+					Runnable creatureOne = new CreatureOne(world, 0, 0);
 					Thread thread = new Thread(creatureOne);
 					thread.start();
 				} else if (random == 2) {
 					// Create a creature thread of the second type
-					Runnable creatureTwo = new CreatureTwo(world, i, j);
+					Runnable creatureTwo = new CreatureTwo(world, 9, 29);
 					Thread thread = new Thread(creatureTwo);
 					thread.start();
 

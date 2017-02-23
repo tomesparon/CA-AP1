@@ -13,7 +13,11 @@ public class WrapWorld extends World{
     
 	
 	@Override
-	public boolean borderControl(int nx, int ny) {
+	public synchronized boolean borderControl(int nx, int ny, Creature creature) {
+		
+		if ((nx >= 0 && nx < ROWS) && (ny >= 0 && ny < COLS)) {
+		return true;
+		}
 		return false;
 		//probably boolean return
 		
