@@ -87,12 +87,12 @@ public abstract class World {
 
 				if (random == 1) {
 					// Create a creature thread of the first type
-					Runnable creatureOne = new CreatureOne(world, 0, 0);
+					Runnable creatureOne = new CreatureOne(world, i, j);
 					Thread thread = new Thread(creatureOne);
 					thread.start();
 				} else if (random == 2) {
 					// Create a creature thread of the second type
-					Runnable creatureTwo = new CreatureTwo(world, 9, 29);
+					Runnable creatureTwo = new CreatureTwo(world, i, j);
 					Thread thread = new Thread(creatureTwo);
 					thread.start();
 

@@ -9,7 +9,7 @@ public class TestWorld {
 		
 		//Choose your world type: WrapWorld = no edges. EdgeWorld = has edges
 		//World world = new WrapWorld();       
-		World world = new WrapWorld();
+		World world = new EdgeWorld();
 		
 		// Generate random growth at beginning.
 		world.populate(world);

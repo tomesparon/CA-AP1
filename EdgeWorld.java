@@ -2,8 +2,6 @@
 public class EdgeWorld extends World {
 	
 
-	
-	// is needed?
 	public EdgeWorld() {
 		
 		// Create a creature matrix

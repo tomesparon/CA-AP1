@@ -2,8 +2,7 @@
 public class WrapWorld extends World{
 	
 
-	
-    //is needed?
+    
 	public WrapWorld() {
 		
 		// Create a creature matrix
@@ -15,7 +14,9 @@ public class WrapWorld extends World{
 	@Override
 	public synchronized boolean borderControl(int nx, int ny, Creature creature) {
 		
-		if ((nx >= 0 && nx < ROWS) && (ny >= 0 && ny < COLS)) {
+		if ((nx < 0 && nx > ROWS) && (ny < 0 && ny > COLS)) {
+			nx = (ROWS-nx);
+			ny = (COLS-ny);
 		return true;
 		}
 		return false;
